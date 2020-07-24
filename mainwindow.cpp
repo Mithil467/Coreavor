@@ -6,6 +6,8 @@
 #include <QMessageBox>
 #include <QTextStream>
 #include <QFontDialog>
+#include <QDateTime>
+#include <QDesktopServices>
 #include<QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -18,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);
     connect(ui->actionZoom_In, &QAction::triggered, this, &MainWindow::zoomIn);
     connect(ui->actionZoom_Out, &QAction::triggered, this, &MainWindow::zoomOut);
+    connect(ui->actionProperties, &QAction::triggered, this, &MainWindow::properties);
+    connect(ui->actionOpen_Containing_Folder, &QAction::triggered, this, &MainWindow::openContainingFolder);
 }
 
 MainWindow::~MainWindow()
@@ -78,7 +82,7 @@ void MainWindow::open()
     ui->graphicsView->scale(scaleFactor, scaleFactor);
     QFileInfo file(fileName);
     setWindowTitle(file.fileName());
-    this->statusBar()->showMessage(QString("%1 %2x%3 %4 B").arg(file.fileName()).arg(image.width()).arg(image.height()).arg(QFile(currentFile).size()));
+    this->statusBar()->showMessage(QString("%1 %2x%3px %4 B").arg(file.fileName()).arg(image.width()).arg(image.height()).arg(QFile(currentFile).size()));
 }
 
 void MainWindow::zoomIn()
@@ -97,4 +101,16 @@ void MainWindow::zoomOut()
     ui->graphicsView->scale(1/1.2, 1/1.2);
     else
         zoomin++;
+}
+
+void MainWindow::properties()
+{
+    QFileInfo file(currentFile);
+    QString x = QString("%1 %2").arg(file.absoluteFilePath()).arg(file.size());
+}
+
+void MainWindow::openContainingFolder()
+{
+    QFileInfo file(currentFile);
+    QDesktopServices::openUrl(file.absoluteDir().absolutePath() );
 }
