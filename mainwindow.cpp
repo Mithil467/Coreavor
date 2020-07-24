@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -17,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
     this->resize(560, 420);
 
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);
+    connect(ui->actionZoom_In, &QAction::triggered, this, &MainWindow::zoomIn);
+    connect(ui->actionZoom_Out, &QAction::triggered, this, &MainWindow::zoomOut);
 }
 
 MainWindow::~MainWindow()
@@ -45,9 +46,12 @@ void MainWindow::open()
 
     int y = this->size().height() - image.height();
     int x = this->size().width() - image.width();
+
     double scaleFactor = 1.0;
+
     double xsf = this->size().width()/(double)image.width();
     double ysf = this->size().height()/(double)image.height();
+
     // There are 4 cases here -
     // 1. (+x,+y) Image fits well in the slot -> Do nothing
     // 2. (-x, +y) Image extends vertically
@@ -61,16 +65,34 @@ void MainWindow::open()
         else
             scaleFactor = ysf;
     }
+
     if(x<0 && y>=0)
         scaleFactor = xsf;
-   if(x>=0 && y<0)
-       scaleFactor = ysf;
-   scaleFactor -= 0.015;
+    if(x>=0 && y<0)
+        scaleFactor = ysf;
 
+    // Although the above math seems right,
+    // there is a small unknown difference
+    scaleFactor -= 0.015;
 
-        ui->graphicsView->scale(scaleFactor, scaleFactor);
-
-
-
+    ui->graphicsView->scale(scaleFactor, scaleFactor);
     setWindowTitle(fileName);
+}
+
+void MainWindow::zoomIn()
+{
+    zoomin++;
+    if(zoomin<=12)
+    ui->graphicsView->scale(1.2, 1.2);
+    else
+        zoomin--;
+}
+
+void MainWindow::zoomOut()
+{
+    zoomin--;
+    if(zoomin>=-8)
+    ui->graphicsView->scale(1/1.2, 1/1.2);
+    else
+        zoomin++;
 }

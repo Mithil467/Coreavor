@@ -20,7 +20,10 @@ private:
     QString currentFile;
     QGraphicsScene *scene;
     QPixmap image;
+    int zoomin{0};
 
     private slots:
         void open();
+        void zoomIn();
+        void zoomOut();
 };
