@@ -112,5 +112,8 @@ void MainWindow::properties()
 void MainWindow::openContainingFolder()
 {
     QFileInfo file(currentFile);
+
+    // Get the directory QString
     QDesktopServices::openUrl(file.absoluteDir().absolutePath() );
 }
+
