@@ -78,6 +78,7 @@ void MainWindow::open()
     ui->graphicsView->scale(scaleFactor, scaleFactor);
     QFileInfo file(fileName);
     setWindowTitle(file.fileName());
+    this->statusBar()->showMessage(QString("%1 %2x%3 %4 B").arg(file.fileName()).arg(image.width()).arg(image.height()).arg(QFile(currentFile).size()));
 }
 
 void MainWindow::zoomIn()
