@@ -16,4 +16,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QString currentFile;
+
+    private slots:
+        void open();
 };
