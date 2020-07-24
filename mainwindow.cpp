@@ -28,7 +28,7 @@ MainWindow::~MainWindow()
 void MainWindow::open()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "Open image", QDir::homePath()+"/Pictures");
-    QFile file(fileName);
+
     currentFile = fileName;
 
     // Reset scale
@@ -76,7 +76,8 @@ void MainWindow::open()
     scaleFactor -= 0.015;
 
     ui->graphicsView->scale(scaleFactor, scaleFactor);
-    setWindowTitle(fileName);
+    QFileInfo file(fileName);
+    setWindowTitle(file.fileName());
 }
 
 void MainWindow::zoomIn()

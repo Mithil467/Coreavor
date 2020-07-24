@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(46, 52, 54);
+color: rgb(238, 238, 236);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
@@ -22,6 +26,9 @@
         <width>420</width>
         <height>300</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
       </property>
      </widget>
     </item>
@@ -75,6 +82,17 @@
    <addaction name="menuGo"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
   <action name="actionOpen">
    <property name="text">
     <string>Open</string>
@@ -138,7 +156,7 @@
     <string>Zoom In</string>
    </property>
    <property name="shortcut">
-    <string>=</string>
+    <string>Ctrl+=</string>
    </property>
   </action>
   <action name="actionZoom_Out">
@@ -146,7 +164,7 @@
     <string>Zoom Out</string>
    </property>
    <property name="shortcut">
-    <string>-</string>
+    <string>Ctrl+-</string>
    </property>
   </action>
  </widget>
