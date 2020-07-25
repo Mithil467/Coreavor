@@ -16,14 +16,31 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->resize(560, 420);
 
+    // Image menu
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);
+    connect(ui->actionSave, &QAction::triggered, this, &MainWindow::save);
+    connect(ui->actionSave_As, &QAction::triggered, this, &MainWindow::saveAs);
+    connect(ui->actionPrint, &QAction::triggered, this, &MainWindow::print);
+    connect(ui->actionSet_As_Desktop_Background, &QAction::triggered, this, &MainWindow::setAsDesktopBackground);
+    connect(ui->actionOpen_Containing_Folder, &QAction::triggered, this, &MainWindow::openContainingFolder);
+    connect(ui->actionProperties, &QAction::triggered, this, &MainWindow::properties);
+    connect(ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
+
+    // Edit menu
+    connect(ui->actionRotate, &QAction::triggered, this, &MainWindow::rotate);
+    connect(ui->actionTrash, &QAction::triggered, this, &MainWindow::trash);
+
+    // View menu
     connect(ui->actionZoom_In, &QAction::triggered, this, &MainWindow::zoomIn);
     connect(ui->actionZoom_Out, &QAction::triggered, this, &MainWindow::zoomOut);
-    connect(ui->actionProperties, &QAction::triggered, this, &MainWindow::properties);
-    connect(ui->actionOpen_Containing_Folder, &QAction::triggered, this, &MainWindow::openContainingFolder);
+    connect(ui->actionFullscreen, &QAction::triggered, this, &MainWindow::fullscreen);
+
+    // Help menu
+    connect(ui->actionAbout , &QAction::triggered, this, &MainWindow::about);
+
+    // Toolbar
     connect(ui->actionPrevious, &QAction::triggered, this, &MainWindow::previousImage);
     connect(ui->actionNext, &QAction::triggered, this, &MainWindow::nextImage);
-    connect(ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
 }
 
 MainWindow::~MainWindow()
@@ -165,6 +182,53 @@ void MainWindow::nextImage()
         currentFile = dir.absoluteFilePath(fileNames.at(0));
 
     showImage();
+}
+
+
+void MainWindow::rotate()
+{
+    this->image = this->image.transformed(QTransform().rotate(90));
+    this->scene->addPixmap(image);
+    this->scene->setSceneRect(image.rect());
+    ui->graphicsView->setScene(scene);
+}
+
+
+void MainWindow::trash()
+{
+
+}
+
+
+void MainWindow::fullscreen()
+{
+
+}
+
+
+void MainWindow::about()
+{
+    QMessageBox::information(this, "Coreavor", "Simple image viewer\nDeveloper: Mithil Poojary");
+}
+
+void MainWindow::save()
+{
+    image.save(currentFile);
+}
+
+void MainWindow::saveAs()
+{
+
+}
+
+void MainWindow::setAsDesktopBackground()
+{
+
+}
+
+void MainWindow::print()
+{
+
 }
 
 void MainWindow::exit()

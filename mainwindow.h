@@ -35,4 +35,12 @@ private slots:
     void showImage();
     void previousImage();
     void nextImage();
+    void about();
+    void trash();
+    void fullscreen();
+    void rotate();
+    void save();
+    void saveAs();
+    void setAsDesktopBackground();
+    void print();
 };
