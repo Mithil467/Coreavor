@@ -2,8 +2,8 @@
 
 Image viewer
 
-[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/Mithil467/coreavor.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Mithil467/coreavor/context:cpp)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/Mithil467/coreavor.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Mithil467/coreavor/alerts/)
+[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/Mithil467/Coreavor.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Mithil467/Coreavor/context:cpp)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/Mithil467/Coreavor.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Mithil467/Coreavor/alerts/)
 
 #### What is it?
 
