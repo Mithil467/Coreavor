@@ -8,11 +8,10 @@
 #include <QFontDialog>
 #include <QDateTime>
 #include <QDesktopServices>
-#include<QDebug>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     this->resize(560, 420);
@@ -34,10 +33,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::open()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, "Open image", QDir::homePath()+"/Pictures");
+    QString fileName = QFileDialog::getOpenFileName(this, "Open image", QDir::homePath() + "/Pictures");
 
-
-    if(fileName != "")
+    if (fileName != "")
     {
         currentFile = fileName;
         showImage();
@@ -58,14 +56,13 @@ void MainWindow::showImage()
     this->scene->setSceneRect(image.rect());
     ui->graphicsView->setScene(scene);
 
-
     int y = this->size().height() - image.height();
     int x = this->size().width() - image.width();
 
     double scaleFactor = 1.0;
 
-    double xsf = this->size().width()/(double)image.width();
-    double ysf = this->size().height()/(double)image.height();
+    double xsf = this->size().width() / (double)image.width();
+    double ysf = this->size().height() / (double)image.height();
 
     // There are 4 cases here -
     // 1. (+x,+y) Image fits well in the slot -> Do nothing
@@ -73,17 +70,17 @@ void MainWindow::showImage()
     // 3. (+x, -y) Image extends horizontally
     // 4. (-x, -y) Image extends both directions -> This has 2 cases
 
-    if(x<0 && y<0)
+    if (x < 0 && y < 0)
     {
-        if(x < y)
+        if (x < y)
             scaleFactor = xsf;
         else
             scaleFactor = ysf;
     }
 
-    if(x<0 && y>=0)
+    if (x < 0 && y >= 0)
         scaleFactor = xsf;
-    if(x>=0 && y<0)
+    if (x >= 0 && y < 0)
         scaleFactor = ysf;
 
     // Although the above math seems right,
@@ -99,7 +96,7 @@ void MainWindow::showImage()
 void MainWindow::zoomIn()
 {
     zoomin++;
-    if(zoomin<=12)
+    if (zoomin <= 12)
         ui->graphicsView->scale(1.2, 1.2);
     else
         zoomin--;
@@ -108,8 +105,8 @@ void MainWindow::zoomIn()
 void MainWindow::zoomOut()
 {
     zoomin--;
-    if(zoomin>=-8)
-        ui->graphicsView->scale(1/1.2, 1/1.2);
+    if (zoomin >= -8)
+        ui->graphicsView->scale(1 / 1.2, 1 / 1.2);
     else
         zoomin++;
 }
@@ -125,7 +122,7 @@ void MainWindow::openContainingFolder()
     QFileInfo file(currentFile);
 
     // Get the directory QString
-    QDesktopServices::openUrl(file.absoluteDir().absolutePath() );
+    QDesktopServices::openUrl(file.absoluteDir().absolutePath());
 }
 
 void MainWindow::previousImage()
@@ -133,7 +130,11 @@ void MainWindow::previousImage()
     QFileInfo file(currentFile);
     QDir dir = file.absoluteDir();
     QStringList nameFilters;
-    nameFilters << "*.png" << "*.gif" << "*.jpg" << "*.jpeg" << "*.svg";
+    nameFilters << "*.png"
+                << "*.gif"
+                << "*.jpg"
+                << "*.jpeg"
+                << "*.svg";
     QStringList fileNames = dir.entryList(nameFilters, QDir::Files, QDir::Name);
 
     int index = fileNames.indexOf(QRegExp(QRegExp::escape(file.fileName())));
@@ -150,7 +151,11 @@ void MainWindow::nextImage()
     QFileInfo file(currentFile);
     QDir dir = file.absoluteDir();
     QStringList nameFilters;
-    nameFilters << "*.png" << "*.gif" << "*.jpg" << "*.jpeg" << "*.svg";
+    nameFilters << "*.png"
+                << "*.gif"
+                << "*.jpg"
+                << "*.jpeg"
+                << "*.svg";
     QStringList fileNames = dir.entryList(nameFilters, QDir::Files, QDir::Name);
 
     int index = fileNames.indexOf(QRegExp(QRegExp::escape(file.fileName())));
@@ -166,4 +171,3 @@ void MainWindow::exit()
 {
     QApplication::quit();
 }
-
