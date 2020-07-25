@@ -43,4 +43,6 @@ private slots:
     void saveAs();
     void setAsDesktopBackground();
     void print();
+    void scaleImageToFitWindow();
+    void mouseDoubleClickEvent(QMouseEvent *e);
 };

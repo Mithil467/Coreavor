@@ -154,9 +154,6 @@ color: rgb(238, 238, 236);</string>
    <property name="text">
     <string>Exit</string>
    </property>
-   <property name="shortcut">
-    <string>Esc</string>
-   </property>
   </action>
   <action name="actionZoom_In">
    <property name="text">
@@ -205,10 +202,16 @@ color: rgb(238, 238, 236);</string>
    <property name="text">
     <string>Fullscreen</string>
    </property>
+   <property name="shortcut">
+    <string>F</string>
+   </property>
   </action>
   <action name="actionRotate">
    <property name="text">
     <string>Rotate</string>
+   </property>
+   <property name="shortcut">
+    <string>R</string>
    </property>
   </action>
   <action name="actionRotate_Right">

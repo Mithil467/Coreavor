@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->resize(560, 420);
+    resize(560, 420);
 
     // Image menu
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);
@@ -65,21 +65,29 @@ void MainWindow::showImage()
     ui->graphicsView->resetMatrix();
 
     // Image is a Pixmap
-    this->image.load(currentFile);
+    image.load(currentFile);
 
-    this->scene = new QGraphicsScene(this);
+    scene = new QGraphicsScene(this);
 
-    this->scene->addPixmap(image);
-    this->scene->setSceneRect(image.rect());
+    scene->addPixmap(image);
+    scene->setSceneRect(image.rect());
     ui->graphicsView->setScene(scene);
 
-    int y = this->size().height() - image.height();
-    int x = this->size().width() - image.width();
+    scaleImageToFitWindow();
+    QFileInfo file(currentFile);
+    setWindowTitle(file.fileName());
+    statusBar()->showMessage(QString("%1 %2x%3px %4 B").arg(file.fileName()).arg(image.width()).arg(image.height()).arg(QFile(currentFile).size()));
+}
+
+void MainWindow::scaleImageToFitWindow()
+{
+    int y = ui->graphicsView->size().height() - image.height();
+    int x = ui->graphicsView->size().width() - image.width();
 
     double scaleFactor = 1.0;
 
-    double xsf = this->size().width() / (double)image.width();
-    double ysf = this->size().height() / (double)image.height();
+    double xsf = ui->graphicsView->size().width() / (double)image.width();
+    double ysf = ui->graphicsView->size().height() / (double)image.height();
 
     // There are 4 cases here -
     // 1. (+x,+y) Image fits well in the slot -> Do nothing
@@ -100,14 +108,7 @@ void MainWindow::showImage()
     if (x >= 0 && y < 0)
         scaleFactor = ysf;
 
-    // Although the above math seems right,
-    // there is a small unknown difference
-    scaleFactor -= 0.015;
-
     ui->graphicsView->scale(scaleFactor, scaleFactor);
-    QFileInfo file(currentFile);
-    setWindowTitle(file.fileName());
-    this->statusBar()->showMessage(QString("%1 %2x%3px %4 B").arg(file.fileName()).arg(image.width()).arg(image.height()).arg(QFile(currentFile).size()));
 }
 
 void MainWindow::zoomIn()
@@ -187,10 +188,12 @@ void MainWindow::nextImage()
 
 void MainWindow::rotate()
 {
-    this->image = this->image.transformed(QTransform().rotate(90));
-    this->scene->addPixmap(image);
-    this->scene->setSceneRect(image.rect());
-    ui->graphicsView->setScene(scene);
+    if(!image.isNull())
+    {    image = image.transformed(QTransform().rotate(90));
+        scene->addPixmap(image);
+        scene->setSceneRect(image.rect());
+        ui->graphicsView->setScene(scene);
+    }
 }
 
 
@@ -202,7 +205,10 @@ void MainWindow::trash()
 
 void MainWindow::fullscreen()
 {
-
+    ui->graphicsView->resetMatrix();
+    showFullScreen();
+    ui->graphicsView->showFullScreen();
+    scaleImageToFitWindow();
 }
 
 
@@ -213,7 +219,8 @@ void MainWindow::about()
 
 void MainWindow::save()
 {
-    image.save(currentFile);
+    if(currentFile != "" && !image.isNull())
+        image.save(currentFile);
 }
 
 void MainWindow::saveAs()
@@ -234,4 +241,13 @@ void MainWindow::print()
 void MainWindow::exit()
 {
     QApplication::quit();
+}
+
+void MainWindow::mouseDoubleClickEvent(QMouseEvent *e) {
+    QWidget::mouseDoubleClickEvent(e);
+    if(isFullScreen()) {
+        setWindowState(Qt::WindowMaximized);
+    } else {
+        setWindowState(Qt::WindowFullScreen);
+    }
 }
