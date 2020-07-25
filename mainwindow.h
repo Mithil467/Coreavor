@@ -29,4 +29,7 @@ private:
         void properties();
         void openContainingFolder();
         void exit();
+        void showImage();
+        void previousImage();
+        void nextImage();
 };

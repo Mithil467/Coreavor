@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionZoom_Out, &QAction::triggered, this, &MainWindow::zoomOut);
     connect(ui->actionProperties, &QAction::triggered, this, &MainWindow::properties);
     connect(ui->actionOpen_Containing_Folder, &QAction::triggered, this, &MainWindow::openContainingFolder);
+    connect(ui->actionPrevious, &QAction::triggered, this, &MainWindow::previousImage);
+    connect(ui->actionNext, &QAction::triggered, this, &MainWindow::nextImage);
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
 }
 
@@ -34,13 +36,21 @@ void MainWindow::open()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "Open image", QDir::homePath()+"/Pictures");
 
-    currentFile = fileName;
 
+    if(fileName != "")
+    {
+        currentFile = fileName;
+        showImage();
+    }
+}
+
+void MainWindow::showImage()
+{
     // Reset scale
     ui->graphicsView->resetMatrix();
 
     // Image is a Pixmap
-    this->image.load(fileName);
+    this->image.load(currentFile);
 
     this->scene = new QGraphicsScene(this);
 
@@ -81,7 +91,7 @@ void MainWindow::open()
     scaleFactor -= 0.015;
 
     ui->graphicsView->scale(scaleFactor, scaleFactor);
-    QFileInfo file(fileName);
+    QFileInfo file(currentFile);
     setWindowTitle(file.fileName());
     this->statusBar()->showMessage(QString("%1 %2x%3px %4 B").arg(file.fileName()).arg(image.width()).arg(image.height()).arg(QFile(currentFile).size()));
 }
@@ -90,7 +100,7 @@ void MainWindow::zoomIn()
 {
     zoomin++;
     if(zoomin<=12)
-    ui->graphicsView->scale(1.2, 1.2);
+        ui->graphicsView->scale(1.2, 1.2);
     else
         zoomin--;
 }
@@ -99,7 +109,7 @@ void MainWindow::zoomOut()
 {
     zoomin--;
     if(zoomin>=-8)
-    ui->graphicsView->scale(1/1.2, 1/1.2);
+        ui->graphicsView->scale(1/1.2, 1/1.2);
     else
         zoomin++;
 }
@@ -116,6 +126,40 @@ void MainWindow::openContainingFolder()
 
     // Get the directory QString
     QDesktopServices::openUrl(file.absoluteDir().absolutePath() );
+}
+
+void MainWindow::previousImage()
+{
+    QFileInfo file(currentFile);
+    QDir dir = file.absoluteDir();
+    QStringList nameFilters;
+    nameFilters << "*.png" << "*.gif" << "*.jpg" << "*.jpeg" << "*.svg";
+    QStringList fileNames = dir.entryList(nameFilters, QDir::Files, QDir::Name);
+
+    int index = fileNames.indexOf(QRegExp(QRegExp::escape(file.fileName())));
+    if (index > 0)
+        currentFile = dir.absoluteFilePath(fileNames.at(index - 1));
+    else
+        currentFile = dir.absoluteFilePath(fileNames.at(fileNames.size() - 1));
+
+    showImage();
+}
+
+void MainWindow::nextImage()
+{
+    QFileInfo file(currentFile);
+    QDir dir = file.absoluteDir();
+    QStringList nameFilters;
+    nameFilters << "*.png" << "*.gif" << "*.jpg" << "*.jpeg" << "*.svg";
+    QStringList fileNames = dir.entryList(nameFilters, QDir::Files, QDir::Name);
+
+    int index = fileNames.indexOf(QRegExp(QRegExp::escape(file.fileName())));
+    if (index < fileNames.size() - 1)
+        currentFile = dir.absoluteFilePath(fileNames.at(index + 1));
+    else
+        currentFile = dir.absoluteFilePath(fileNames.at(0));
+
+    showImage();
 }
 
 void MainWindow::exit()
