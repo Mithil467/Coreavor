@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionZoom_Out, &QAction::triggered, this, &MainWindow::zoomOut);
     connect(ui->actionProperties, &QAction::triggered, this, &MainWindow::properties);
     connect(ui->actionOpen_Containing_Folder, &QAction::triggered, this, &MainWindow::openContainingFolder);
+    connect(ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
 }
 
 MainWindow::~MainWindow()
@@ -115,5 +116,10 @@ void MainWindow::openContainingFolder()
 
     // Get the directory QString
     QDesktopServices::openUrl(file.absoluteDir().absolutePath() );
+}
+
+void MainWindow::exit()
+{
+    QApplication::quit();
 }
 

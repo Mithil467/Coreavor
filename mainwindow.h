@@ -28,4 +28,5 @@ private:
         void zoomOut();
         void properties();
         void openContainingFolder();
+        void exit();
 };
