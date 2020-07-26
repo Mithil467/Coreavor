@@ -76,7 +76,7 @@ void MainWindow::showImage()
     scaleImageToFitWindow();
     QFileInfo file(currentFile);
     setWindowTitle(file.fileName());
-    statusBar()->showMessage(QString("%1 %2x%3px %4 B").arg(file.fileName()).arg(image.width()).arg(image.height()).arg(QFile(currentFile).size()));
+    statusBar()->showMessage(QString("%1 %2x%3px %4 kB").arg(file.fileName()).arg(image.width()).arg(image.height()).arg(QFile(currentFile).size()/1000.0));
 }
 
 void MainWindow::scaleImageToFitWindow()
@@ -132,7 +132,16 @@ void MainWindow::zoomOut()
 void MainWindow::properties()
 {
     QFileInfo file(currentFile);
-    QString x = QString("%1 %2").arg(file.absoluteFilePath()).arg(file.size());
+    QString x = QString("Name: %1\nType: %2\nSize: %3kB\nWidth: %4 px\nHeight: %5 px\nModified Time: %6").
+            arg(file.fileName()).
+            arg(file.suffix()).
+            arg(file.size()/1000.0).
+            arg(image.width()).
+            arg(image.height()).
+            arg(file.birthTime().
+                toString("hh:mm:ss d/M/yyyy")
+                );
+    QMessageBox::information(this, currentFile, x);
 }
 
 void MainWindow::openContainingFolder()
