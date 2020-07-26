@@ -177,11 +177,19 @@ void MainWindow::nextImage()
     QStringList fileNames = dir.entryList(nameFilters, QDir::Files, QDir::Name);
 
     int index = fileNames.indexOf(QRegExp(QRegExp::escape(file.fileName())));
-    if (index < fileNames.size() - 1)
-        currentFile = dir.absoluteFilePath(fileNames.at(index + 1));
-    else
-        currentFile = dir.absoluteFilePath(fileNames.at(0));
 
+
+    if (index != -1)
+    {
+        if (index < fileNames.size() - 1)
+            currentFile = dir.absoluteFilePath(fileNames.at(index + 1));
+        else
+            currentFile = dir.absoluteFilePath(fileNames.at(0));
+    }
+    else
+    {
+        currentFile = "";
+    }
     showImage();
 }
 
@@ -199,7 +207,10 @@ void MainWindow::rotate()
 
 void MainWindow::trash()
 {
+    QFile::remove(currentFile);
 
+    // Move to next image
+    MainWindow::nextImage();
 }
 
 

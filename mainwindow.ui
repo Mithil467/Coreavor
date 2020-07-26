@@ -223,6 +223,9 @@ color: rgb(238, 238, 236);</string>
    <property name="text">
     <string>Trash</string>
    </property>
+   <property name="shortcut">
+    <string>Del</string>
+   </property>
   </action>
  </widget>
  <resources/>
