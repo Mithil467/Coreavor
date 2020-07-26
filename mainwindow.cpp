@@ -205,9 +205,10 @@ void MainWindow::trash()
 
 void MainWindow::fullscreen()
 {
-    ui->graphicsView->resetMatrix();
     showFullScreen();
     ui->graphicsView->showFullScreen();
+
+    ui->graphicsView->resetMatrix();
     scaleImageToFitWindow();
 }
 
@@ -241,6 +242,11 @@ void MainWindow::print()
 void MainWindow::exit()
 {
     QApplication::quit();
+}
+
+void MainWindow::resizeEvent(QResizeEvent *e) {
+    ui->graphicsView->resetMatrix();
+    scaleImageToFitWindow();
 }
 
 void MainWindow::mouseDoubleClickEvent(QMouseEvent *e) {

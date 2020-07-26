@@ -45,4 +45,5 @@ private slots:
     void print();
     void scaleImageToFitWindow();
     void mouseDoubleClickEvent(QMouseEvent *e);
+    void resizeEvent(QResizeEvent *e);
 };
