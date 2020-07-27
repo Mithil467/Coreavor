@@ -16,6 +16,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     resize(560, 420);
 
+    QStringList argumentList = QApplication::arguments();
+    if(argumentList.size() > 1)
+    {
+        currentFile = argumentList.at(1);
+        showImage();
+    }
+
     // Image menu
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::save);
