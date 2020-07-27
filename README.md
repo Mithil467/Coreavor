@@ -19,13 +19,31 @@ The UI is inspired from [Eye of Mate](https://github.com/mate-desktop/eom).
 - Open image (png, jpg, jpeg, svg, gif)
 - Move back and forth in current directory
 - Zoom in and out
+- Rotate image and save
 - View in explorer
+- Export image as jpg or png
+- "Open image with" in context menu
+- Delete image
+- Fullscreen
+- View properties
 
-#### Where to get it?
+#### How to install?
+
+Clone the repo and from within the repo execute the following commands.
+```
+qmake -makefile
+sudo make install
+make clean
+```
+Now you can find Coreavor in `Menu` as well as run it from terminal as `Coreavor` or `Coreavor <file name>`
+
+You can also open an image by right clicking and selecting `Open With Coreavor`.
+
+#### Where to get just the executable?
 
 Download the latest version of Coreavor from [releases](https://github.com/Mithil467/mitpick/releases/latest).
 
-#### How to build?
+#### How to build the executable?
 
 Make sure you have the dependencies required for QT5 installed.
 Clone the repo and from within the repo execute the following commands.
