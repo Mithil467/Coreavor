@@ -1,9 +1,10 @@
-# Coreavor
-
-<img src="icon.png" height=360x>
-
-[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/Mithil467/Coreavor.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Mithil467/Coreavor/context:cpp)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/Mithil467/Coreavor.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Mithil467/Coreavor/alerts/)
+<h1 align="center"> Coreavor </h1>
+<p align="center">
+<img src="icon.png" height="360px" alt=>
+  <br />
+    <a href="https://lgtm.com/projects/g/Mithil467/Coreavor/context:cpp"><img src="https://img.shields.io/lgtm/grade/cpp/g/Mithil467/Coreavor.svg?logo=lgtm&logoWidth=18"></a>
+  <img src="https://img.shields.io/badge/Made%20With%20-C%2B%2B%2FQT-%2323005A">
+</p>
 
 #### What is it?
 
