@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Coreavor
+Icon=/usr/share/icons/coreavor.png
+Comment=A simple Image Viewer
+Exec=/opt/Coreavor/bin/Coreavor
+TryExec=/opt/Coreavor/bin/Coreavor
+Terminal=false
