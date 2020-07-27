@@ -40,9 +40,7 @@ private slots:
     void fullscreen();
     void rotate();
     void save();
-    void saveAs();
-    void setAsDesktopBackground();
-    void print();
+    void saveAs(QString);
     void scaleImageToFitWindow();
     void mouseDoubleClickEvent(QMouseEvent *e);
     void resizeEvent(QResizeEvent *e);

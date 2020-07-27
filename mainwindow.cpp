@@ -26,9 +26,6 @@ MainWindow::MainWindow(QWidget *parent)
     // Image menu
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::save);
-    connect(ui->actionSave_As, &QAction::triggered, this, &MainWindow::saveAs);
-    connect(ui->actionPrint, &QAction::triggered, this, &MainWindow::print);
-    connect(ui->actionSet_As_Desktop_Background, &QAction::triggered, this, &MainWindow::setAsDesktopBackground);
     connect(ui->actionOpen_Containing_Folder, &QAction::triggered, this, &MainWindow::openContainingFolder);
     connect(ui->actionProperties, &QAction::triggered, this, &MainWindow::properties);
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
@@ -48,6 +45,9 @@ MainWindow::MainWindow(QWidget *parent)
     // Toolbar
     connect(ui->actionPrevious, &QAction::triggered, this, &MainWindow::previousImage);
     connect(ui->actionNext, &QAction::triggered, this, &MainWindow::nextImage);
+
+    connect(ui->actionJPG,  &QAction::triggered, this, [this]{ saveAs(QString("jpg")); });
+    connect(ui->actionPNG,  &QAction::triggered, this, [this]{ saveAs(QString("png")); });
 }
 
 MainWindow::~MainWindow()
@@ -251,19 +251,10 @@ void MainWindow::save()
         image.save(currentFile);
 }
 
-void MainWindow::saveAs()
+void MainWindow::saveAs(QString x)
 {
-
-}
-
-void MainWindow::setAsDesktopBackground()
-{
-
-}
-
-void MainWindow::print()
-{
-
+    if(currentFile != "" && !image.isNull())
+        image.save(currentFile + "." + x, x.toUpper().toLocal8Bit().constData());
 }
 
 void MainWindow::exit()
