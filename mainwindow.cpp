@@ -262,16 +262,11 @@ void MainWindow::exit()
     QApplication::quit();
 }
 
-void MainWindow::resizeEvent(QResizeEvent *e) {
+void MainWindow::resizeEvent(QResizeEvent*) {
     ui->graphicsView->resetMatrix();
     scaleImageToFitWindow();
 }
 
-void MainWindow::mouseDoubleClickEvent(QMouseEvent *e) {
-    QWidget::mouseDoubleClickEvent(e);
-    if(isFullScreen()) {
-        setWindowState(Qt::WindowMaximized);
-    } else {
-        setWindowState(Qt::WindowFullScreen);
-    }
+void MainWindow::mouseDoubleClickEvent(QMouseEvent*) {
+    setWindowState(isFullScreen()?Qt::WindowMaximized:Qt::WindowFullScreen);
 }
