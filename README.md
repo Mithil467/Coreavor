@@ -29,7 +29,7 @@ The UI is inspired from [Eye of Mate](https://github.com/mate-desktop/eom).
 
 #### How to install?
 
-From the [releases](https://github.com/Mithil467/mitpick/releases/latest), download the deb package.
+From the [releases](https://github.com/Mithil467/coreavor/releases/latest), download the deb package.
 Then from the `Downloads` folder execute with appropriate file name - 
 ```
 sudo apt install ./coreavor_xxx.deb
@@ -47,7 +47,7 @@ You can also open an image by right clicking and selecting `Open With Coreavor`.
 
 #### Where to get just the executable?
 
-Download the latest version of Coreavor from [releases](https://github.com/Mithil467/mitpick/releases/latest).
+Download the latest version of Coreavor from [releases](https://github.com/Mithil467/coreavor/releases/latest).
 
 #### How to build the executable?
 
