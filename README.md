@@ -29,7 +29,13 @@ The UI is inspired from [Eye of Mate](https://github.com/mate-desktop/eom).
 
 #### How to install?
 
-Clone the repo and from within the repo execute the following commands.
+From the [releases](https://github.com/Mithil467/mitpick/releases/latest), download the deb package.
+Then from the `Downloads` folder execute with appropriate file name - 
+```
+sudo apt install ./coreavor_xxx.deb
+```
+
+Alternatively, you could also clone the repo and from within the repo execute the following commands.
 ```
 qmake -makefile
 sudo make install
