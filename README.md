@@ -29,6 +29,12 @@ The UI is inspired from [Eye of Mate](https://github.com/mate-desktop/eom).
 
 #### How to install?
 
+Please note that this program relies on QT library and the release would install fine, but will not work without installing the QT library.
+```
+sudo apt install build-essential libgl1-mesa-dev qt5-default
+```
+This can be fixed by linking QT statically, but I have not managed to succesfully build QT static libraries from source.
+
 From the [releases](https://github.com/Mithil467/coreavor/releases/latest), download the deb package.
 Then from the `Downloads` folder execute with appropriate file name - 
 ```
