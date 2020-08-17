@@ -16,16 +16,16 @@ The UI is inspired from [Eye of Mate](https://github.com/mate-desktop/eom).
 
 #### Features:
 
-- Open image (png, jpg, jpeg, svg, gif)
-- Move back and forth in current directory
-- Zoom in and out
-- Rotate image and save
-- View in explorer
-- Export image as jpg or png
-- "Open image with" in context menu
-- Delete image
-- Fullscreen
-- View properties
+🖼️ Open image (png, jpg, jpeg, svg, gif)  
+◀️▶️ Move  back and forth in current directory  
+🔍 Zoom in and out  
+🔄 Rotate image and save  
+📁 View in explorer  
+💾 Export image as jpg or png  
+"Open image with" in context menu  
+❌ Delete image  
+❌ Fullscreen mode  
+👁️ View properties  
 
 #### How to install?
 
