@@ -24,7 +24,7 @@ The UI is inspired from [Eye of Mate](https://github.com/mate-desktop/eom).
 💾 Export image as jpg or png  
 "Open image with" in context menu  
 ❌ Delete image  
-❌ Fullscreen mode  
+🎦 Fullscreen mode  
 👁️ View properties  
 
 #### How to install?
