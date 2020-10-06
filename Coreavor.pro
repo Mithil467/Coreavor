@@ -9,18 +9,18 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp
+    source/main.cpp \
+    source/mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h
+    source/mainwindow.h
 
 FORMS += \
-    mainwindow.ui
+    forms/mainwindow.ui
 
 ICON = icon.ico
 
-install.commands += (cp icon.png /usr/share/icons/coreavor.png)
+install.commands += (cp ./logo/icon.png /usr/share/icons/coreavor.png)
 QMAKE_EXTRA_TARGETS += install
 uninstall.commands += (rm -f /usr/share/icons/coreavor.png)
 QMAKE_EXTRA_TARGETS += uninstall
