@@ -1,72 +1,51 @@
 <h1 align="center"> Coreavor </h1>
 <p align="center">
-<img src="icon.png" height="360px" alt=>
+<img src="logo/icon.png" height="360px" alt=>
   <br />
     <a href="https://lgtm.com/projects/g/Mithil467/Coreavor/context:cpp"><img src="https://img.shields.io/lgtm/grade/cpp/g/Mithil467/Coreavor.svg?logo=lgtm&logoWidth=18"></a>
-  <img src="https://img.shields.io/badge/Made%20With%20-C%2B%2B%2FQT-%2323005A">
+  <img src="https://img.shields.io/badge/Made%20With%20-C%2B%2B%2FQt-%2323005A">
 </p>
 
-#### What is it?
+**Coreavor** is an image viewer program written in Qt C++.
 
-A simple image viewer.
+## 📷 Screenshot
 
 <img src="https://raw.githubusercontent.com/Mithil467/Coreavor/images/demo.png?token=AJ4FEYIYQAKZTSWB44GVVGC7EWANA" height=500px/>
 
 The UI is inspired from [Eye of Mate](https://github.com/mate-desktop/eom).
 
-#### Features:
+## ✨ Main Features
 
-🖼️ Open image (png, jpg, jpeg, svg, gif)  
-◀️▶️ Move  back and forth in current directory  
-🔍 Zoom in and out  
-🔄 Rotate image and save  
-📁 View in explorer  
-💾 Export image as jpg or png  
-"Open image with" in context menu  
-❌ Delete image  
-🎦 Fullscreen mode  
-👁️ View properties  
+- 🖼️ Open image (png, jpg, jpeg, svg, gif)  
+- 💾 Export image as jpg or png  
+- 🔍 Zoom in and out  
+- 🔄 Rotate image and save  
+- 📁 "Open image with" in file manager context menu  
+- 🎦 Fullscreen mode  
 
-#### How to install?
+## 🔧 Install
 
-Please note that this program relies on QT library and the release would install fine, but will not work without installing the QT library.
-```
-sudo apt install build-essential libgl1-mesa-dev qt5-default
-```
-This can be fixed by linking QT statically, but I have not managed to succesfully build QT static libraries from source.
+Install the following prerequisites for your operating system.
+- Qt5 library
+- C++ compiler
 
-From the [releases](https://github.com/Mithil467/coreavor/releases/latest), download the deb package.
-Then from the `Downloads` folder execute with appropriate file name - 
-```
-sudo apt install ./coreavor_xxx.deb
-```
-
-Alternatively, you could also clone the repo and from within the repo execute the following commands.
+Clone the repo and run -
 ```
 qmake -makefile
 sudo make install
 make clean
 ```
-Now you can find Coreavor in `Menu` as well as run it from terminal as `Coreavor` or `Coreavor <file name>`
 
-You can also open an image by right clicking and selecting `Open With Coreavor`.
+## 📈 Usage
 
-#### Where to get just the executable?
+Upon installation, you can find Coreavor in `Menu` as well as run it from terminal as `Coreavor` or `Coreavor <file name>`.
 
-Download the latest version of Coreavor from [releases](https://github.com/Mithil467/coreavor/releases/latest).
+You can also open an image by right clicking and selecting `Open With Coreavor` in file manager.
 
-#### How to build the executable?
+## 💚 Contributing
 
-Make sure you have the dependencies required for QT5 installed.
-Clone the repo and from within the repo execute the following commands.
+We encourage you to contribute to Coreavor! Please check out the [Contributing Guidelines](CONTRIBUTING.md) about how to proceed.
 
-```
-qmake -makefile
-make
-make clean
-```
-This will generate a binary executable `Coreavor`.
+## 📜 License
 
-#### License
-
-GPL © [Mithil Poojary](https://github.com/Mithil467)
+Licensed under the GPL license.
