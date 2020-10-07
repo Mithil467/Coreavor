@@ -24,6 +24,8 @@ install.commands += (cp ./logo/icon.png /usr/share/icons/coreavor.png)
 QMAKE_EXTRA_TARGETS += install
 uninstall.commands += (rm -f /usr/share/icons/coreavor.png)
 QMAKE_EXTRA_TARGETS += uninstall
+clang-format.commands += find . -regex \'.*\\.\\(cpp\\|hpp\\|cu\\|c\\|h\\)\' -exec clang-format -style=file -i {} \;
+QMAKE_EXTRA_TARGETS += clang-format
 
 target.path = /usr/local/bin
 desktop.path = /usr/share/applications
