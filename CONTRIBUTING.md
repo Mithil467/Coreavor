@@ -51,7 +51,9 @@ sudo make install
 
 ### Coding style
 
-Code should be formatted using clang-format. Run `make clang-format` to automatically format code.
+I recommend using [Qt Creator](https://www.qt.io/product/development-tools) to write code.
+
+Code should be linted using clang-format. Make sure `clang-format` is installed and run `make clang-format` to automatically format code before each commit.
 
 ### Git Commit Messages
 
