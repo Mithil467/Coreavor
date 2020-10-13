@@ -8,6 +8,9 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QInputDialog>
+#include <QLabel>
+#include <QDebug>
 
 #include "ui_mainwindow.h"
 
@@ -34,6 +37,7 @@ MainWindow::MainWindow(QWidget* parent)
   // Edit menu
   connect(ui->actionRotate, &QAction::triggered, this, &MainWindow::rotate);
   connect(ui->actionTrash, &QAction::triggered, this, &MainWindow::trash);
+  connect(ui->actionRename, &QAction::triggered, this, &MainWindow::rename);
 
   // View menu
   connect(ui->actionZoom_In, &QAction::triggered, this, &MainWindow::zoomIn);
@@ -199,6 +203,7 @@ void MainWindow::nextImage() {
   showImage();
 }
 
+
 void MainWindow::rotate() {
   if (!image.isNull()) {
     image = image.transformed(QTransform().rotate(90));
@@ -236,7 +241,34 @@ void MainWindow::saveAs(QString x) {
   if (currentFile != "" && !image.isNull())
     image.save(currentFile + "." + x, x.toUpper().toLocal8Bit().constData());
 }
+void MainWindow::rename(){
+  if(currentFile != "" && !image.isNull()){
+      bool ok;
+      QString text = QInputDialog::getText(this, tr("Rename"),
+                                           tr("Name for the file:"), QLineEdit::Normal,
+                                            QDir::home().dirName(), &ok);
 
+      //Find position of the last '/' to find directory
+      QString dir = currentFile;
+      QString format;
+      std::reverse(dir.begin(), dir.end());
+      int bslash_position = dir.indexOf("/");
+      int dot_position = dir.indexOf(".");
+      bslash_position = currentFile.size() - bslash_position;
+      for(int i = 0; i < dot_position; i++){
+          format.append(dir[i]);
+      }
+      std::reverse(format.begin(), format.end());
+      dir.clear();
+      for(int i = 0; i < bslash_position; i++){
+          dir.append(currentFile[i]);
+      }
+
+         if (ok && !text.isEmpty()){
+            image.save(dir + text + "." + format);
+         }
+  }
+}
 void MainWindow::exit() { QApplication::quit(); }
 
 void MainWindow::resizeEvent(QResizeEvent*) {
