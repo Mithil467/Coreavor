@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>438</width>
+    <width>444</width>
     <height>402</height>
    </rect>
   </property>
@@ -43,7 +43,7 @@ color: rgb(238, 238, 236);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>438</width>
+     <width>444</width>
      <height>22</height>
     </rect>
    </property>
@@ -74,6 +74,8 @@ color: rgb(238, 238, 236);</string>
     <addaction name="actionRotate"/>
     <addaction name="separator"/>
     <addaction name="actionTrash"/>
+    <addaction name="separator"/>
+    <addaction name="actionRename"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -222,6 +224,17 @@ color: rgb(238, 238, 236);</string>
   <action name="actionJPG">
    <property name="text">
     <string>JPG</string>
+   </property>
+  </action>
+  <action name="actionRename">
+   <property name="text">
+    <string>Rename</string>
+   </property>
+   <property name="toolTip">
+    <string>Rename</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
    </property>
   </action>
  </widget>

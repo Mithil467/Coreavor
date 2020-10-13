@@ -43,4 +43,5 @@ class MainWindow : public QMainWindow {
   void scaleImageToFitWindow();
   void mouseDoubleClickEvent(QMouseEvent* e);
   void resizeEvent(QResizeEvent* e);
+  void rename();
 };
