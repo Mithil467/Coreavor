@@ -9,8 +9,6 @@
 #include <QMessageBox>
 #include <QTextStream>
 #include <QInputDialog>
-#include <QLabel>
-#include <QDebug>
 
 #include "ui_mainwindow.h"
 
@@ -251,10 +249,10 @@ void MainWindow::rename() {
                                             currentName, &ok);
       if(ok && !text.isEmpty()) {
           QString renamedFile = file.absoluteDir().absoluteFilePath(text);
-          QFileInfo checkFile(renamedFile); //Check if file exist in that directory
-          if(checkFile.exists()) {
+          QFileInfo checkFile(renamedFile);
+          if(checkFile.exists())
               QMessageBox::information(this,"Warning",checkFile.fileName() + " already exists");
-          } else {
+          else {
               image.save(renamedFile);
               QFile file(currentFile);
               file.remove();
