@@ -241,32 +241,28 @@ void MainWindow::saveAs(QString x) {
   if (currentFile != "" && !image.isNull())
     image.save(currentFile + "." + x, x.toUpper().toLocal8Bit().constData());
 }
-void MainWindow::rename(){
-  if(currentFile != "" && !image.isNull()){
+void MainWindow::rename() {
+  if(currentFile != "" && !image.isNull()) {
       bool ok;
+      QFileInfo file(currentFile);
+      QString currentName = file.fileName();
       QString text = QInputDialog::getText(this, tr("Rename"),
                                            tr("Name for the file:"), QLineEdit::Normal,
-                                            QDir::home().dirName(), &ok);
-
-      //Find position of the last '/' to find directory
-      QString dir = currentFile;
-      QString format;
-      std::reverse(dir.begin(), dir.end());
-      int bslash_position = dir.indexOf("/");
-      int dot_position = dir.indexOf(".");
-      bslash_position = currentFile.size() - bslash_position;
-      for(int i = 0; i < dot_position; i++){
-          format.append(dir[i]);
+                                            currentName, &ok);
+      if(ok && !text.isEmpty()) {
+          QString renamedFile = file.absoluteDir().absoluteFilePath(text);
+          QFileInfo checkFile(renamedFile); //Check if file exist in that directory
+          if(checkFile.exists()) {
+              QMessageBox::information(this,"Warning",checkFile.fileName() + " already exists");
+          } else {
+              image.save(renamedFile);
+              QFile file(currentFile);
+              file.remove();
+              file.close();
+              currentFile = renamedFile;
+              showImage();
+          }
       }
-      std::reverse(format.begin(), format.end());
-      dir.clear();
-      for(int i = 0; i < bslash_position; i++){
-          dir.append(currentFile[i]);
-      }
-
-         if (ok && !text.isEmpty()){
-            image.save(dir + text + "." + format);
-         }
   }
 }
 void MainWindow::exit() { QApplication::quit(); }
