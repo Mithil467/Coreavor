@@ -247,7 +247,6 @@ void MainWindow::rename() {
         QInputDialog::getText(this, tr("Rename"), tr("Name for the file:"),
                               QLineEdit::Normal, currentName, &ok);
     if (!ok || text.isEmpty()) return;
-    qDebug() << "code gets here";
     QString renamedFile = file.absoluteDir().absoluteFilePath(text);
     QFileInfo checkFile(renamedFile);
     if (checkFile.exists())
