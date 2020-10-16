@@ -5,6 +5,7 @@
 #include <QDesktopServices>
 #include <QFileDialog>
 #include <QFontDialog>
+#include <QInputDialog>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QTextStream>
@@ -34,6 +35,7 @@ MainWindow::MainWindow(QWidget* parent)
   // Edit menu
   connect(ui->actionRotate, &QAction::triggered, this, &MainWindow::rotate);
   connect(ui->actionTrash, &QAction::triggered, this, &MainWindow::trash);
+  connect(ui->actionRename, &QAction::triggered, this, &MainWindow::rename);
 
   // View menu
   connect(ui->actionZoom_In, &QAction::triggered, this, &MainWindow::zoomIn);
@@ -236,7 +238,30 @@ void MainWindow::saveAs(QString x) {
   if (currentFile != "" && !image.isNull())
     image.save(currentFile + "." + x, x.toUpper().toLocal8Bit().constData());
 }
-
+void MainWindow::rename() {
+  if (currentFile != "" && !image.isNull()) {
+    bool ok;
+    QFileInfo file(currentFile);
+    QString currentName = file.fileName();
+    QString text =
+        QInputDialog::getText(this, tr("Rename"), tr("Name for the file:"),
+                              QLineEdit::Normal, currentName, &ok);
+    if (!ok || text.isEmpty()) return;
+    QString renamedFile = file.absoluteDir().absoluteFilePath(text);
+    QFileInfo checkFile(renamedFile);
+    if (checkFile.exists())
+      QMessageBox::information(this, "Warning",
+                               checkFile.fileName() + " already exists");
+    else {
+      image.save(renamedFile);
+      QFile file(currentFile);
+      file.remove();
+      file.close();
+      currentFile = renamedFile;
+      showImage();
+    }
+  }
+}
 void MainWindow::exit() { QApplication::quit(); }
 
 void MainWindow::resizeEvent(QResizeEvent*) {
