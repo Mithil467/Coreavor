@@ -226,8 +226,11 @@ void MainWindow::fullscreen() {
 }
 
 void MainWindow::about() {
-  QMessageBox::information(this, "Coreavor",
-                           "Simple image viewer\nDeveloper: Mithil Poojary");
+  QMessageBox::about(this, "About Coreavor",
+                     "<center><h2>Coreavor</h2></center><br>"
+                     "Simple image viewer<br>"
+                     "Source code at <a style=\"color: #8AB8FE\" "
+                     "href='https://github.com/Mithil467/Coreavor'>GitHub</a>");
 }
 
 void MainWindow::save() {
