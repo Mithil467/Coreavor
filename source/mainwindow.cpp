@@ -171,7 +171,7 @@ void MainWindow::previousImage() {
   int index = fileNames.indexOf(QRegExp(QRegExp::escape(file.fileName())));
   if (index > 0)
     currentFile = dir.absoluteFilePath(fileNames.at(index - 1));
-  else
+  else if(fileNames.size() > 0)
     currentFile = dir.absoluteFilePath(fileNames.at(fileNames.size() - 1));
 
   showImage();
